@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import java.text.MessageFormat
 import ro.upt.sma.context.activity.ActivityRecognitionHandler
+import ro.upt.sma.context.activity.ActivityRecognitionService
 import ro.upt.sma.context.location.LocationHandler
 
 class ContextActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -123,13 +124,17 @@ class ContextActivity : AppCompatActivity(), OnMapReadyCallback {
 
         this.activityRecognitionReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                // TODO 6: Extract activity type from intent extras and pass it to updateActivityCard method.
+                // Extract activity type from intent extras and pass it to updateActivityCard method.
                 // Take a look at ActivityRecognitionService to see how intent extras are formed.
+
+                updateActivityCard(
+                    intent.getIntExtra(ActivityRecognitionService.ACTIVITY_EXTRA, 0)
+                )
 
             }
         }
 
-        // TODO 7: Register created receiver only for ActivityRecognitionService.INTENT_ACTION.
+        // Register created receiver only for ActivityRecognitionService.INTENT_ACTION.
         registerReceiver(activityRecognitionReceiver, IntentFilter())
     }
 

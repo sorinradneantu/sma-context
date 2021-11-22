@@ -17,11 +17,17 @@ import android.widget.Toast
 import com.google.android.gms.location.DetectedActivity
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import java.text.MessageFormat
 import ro.upt.sma.context.activity.ActivityRecognitionHandler
+import ro.upt.sma.context.activity.ActivityRecognitionService
+import ro.upt.sma.context.activity.ActivityRecognitionService.Companion.INTENT_ACTION
 import ro.upt.sma.context.location.LocationHandler
 
 class ContextActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -119,22 +125,33 @@ class ContextActivity : AppCompatActivity(), OnMapReadyCallback {
 
         this.activityRecognitionReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                // TODO 6: Extract activity type from intent extras and pass it to updateActivityCard method.
+                // Extract activity type from intent extras and pass it to updateActivityCard method.
                 // Take a look at ActivityRecognitionService to see how intent extras are formed.
+
+                updateActivityCard(
+                    intent.getIntExtra(ActivityRecognitionService.ACTIVITY_EXTRA, 0)
+                )
 
             }
         }
 
-        // TODO 7: Register created receiver only for ActivityRecognitionService.INTENT_ACTION.
-        registerReceiver(activityRecognitionReceiver, IntentFilter())
+        // Register created receiver only for ActivityRecognitionService.INTENT_ACTION.
+        registerReceiver(activityRecognitionReceiver, IntentFilter(INTENT_ACTION))
     }
 
     private fun updateMap(location: Location) {
         if (googleMap != null) {
-            // TODO 3: Clear current marker and create a new marker based on the received location object.
 
-            // TODO 4: Use CameraUpdateFactory to perform a zoom in.
+            // Clear current marker and create a new marker based on the received location object.
+                googleMap!!.clear()
 
+                val newyork = LatLng(40.730610,-73.935242)
+                googleMap!!.addMarker(
+                    MarkerOptions().position(newyork).title("New York Marker")
+                )
+
+            // Use CameraUpdateFactory to perform a zoom in.
+                googleMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(newyork.latitude, newyork.longitude), 10.toFloat()))
         }
     }
 

@@ -4,7 +4,7 @@
   package="ro.upt.sma.context">
 
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>
 
   <application
@@ -16,7 +16,8 @@
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning">
 
-    <activity android:name=".ContextActivity">
+    <activity android:name=".ContextActivity"
+        android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>

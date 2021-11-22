@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import java.text.MessageFormat
 import ro.upt.sma.context.activity.ActivityRecognitionHandler
 import ro.upt.sma.context.activity.ActivityRecognitionService
+import ro.upt.sma.context.activity.ActivityRecognitionService.Companion.INTENT_ACTION
 import ro.upt.sma.context.location.LocationHandler
 
 class ContextActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -135,7 +136,7 @@ class ContextActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         // Register created receiver only for ActivityRecognitionService.INTENT_ACTION.
-        registerReceiver(activityRecognitionReceiver, IntentFilter())
+        registerReceiver(activityRecognitionReceiver, IntentFilter(INTENT_ACTION))
     }
 
     private fun updateMap(location: Location) {
@@ -150,7 +151,7 @@ class ContextActivity : AppCompatActivity(), OnMapReadyCallback {
                 )
 
             // Use CameraUpdateFactory to perform a zoom in.
-                googleMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 20.toFloat()))
+                googleMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(newyork.latitude, newyork.longitude), 10.toFloat()))
         }
     }
 

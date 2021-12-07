@@ -143,17 +143,19 @@ class ContextActivity : AppCompatActivity(), OnMapReadyCallback {
         if (googleMap != null) {
 
             // Clear current marker and create a new marker based on the received location object.
-                googleMap!!.clear()
+                googleMap?.clear()
 
-            /*
-                val newyork = LatLng(40.730610,-73.935242)
-                googleMap!!.addMarker(
-                    MarkerOptions().position(newyork).title("New York Marker")
+
+                //val newyork = LatLng(40.730610,-73.935242)
+                  val coords = LatLng(location.latitude, location.longitude)
+                  val marker = MarkerOptions().position(coords).title("sorin's marker")
+                googleMap?.addMarker(
+                    marker
                 )
-            */
+
 
             // Use CameraUpdateFactory to perform a zoom in.
-                googleMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 10.toFloat()))
+                googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 10.toFloat()))
         }
     }
 

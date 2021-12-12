@@ -136,7 +136,7 @@ class ContextActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         // Register created receiver only for ActivityRecognitionService.INTENT_ACTION.
-        registerReceiver(activityRecognitionReceiver, IntentFilter(INTENT_ACTION))
+        registerReceiver(activityRecognitionReceiver, IntentFilter(ActivityRecognitionService.INTENT_ACTION))
     }
 
     private fun updateMap(location: Location) {

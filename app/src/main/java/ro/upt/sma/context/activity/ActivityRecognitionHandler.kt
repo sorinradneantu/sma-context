@@ -18,9 +18,9 @@ class ActivityRecognitionHandler(context: Context) {
 
         }
 
-        val newPendingIntent = PendingIntent.getService(client.applicationContext, 0, intent, 0)
+        val newPendingIntent = PendingIntent.getService(client.applicationContext, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        client.requestActivityUpdates(0,newPendingIntent)
+        client.requestActivityUpdates(1000,newPendingIntent)
 
         return newPendingIntent
     }
